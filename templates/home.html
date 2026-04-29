@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Mercado</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+  
+</head>
+
+
+<body>
+
+
+  <div class="sidebar">
+    <h2>Mercado</h2>
+    <div class="menu">
+      <a href="{% url 'home' %}">Dashboard</a>
+      <a href="{% url 'Produtos:home' %}">Produtos</a>
+      <a href="#">Clientes</a>
+      <a href="#">Vendas</a>
+      <a href="#">Compras</a>
+    </div>
+  </div>
+
+
+  <div class="main">
+    <div class="header">
+      <h1>Home</h1>
+      <span id="dataAtual"></span>
+    </div>
+
+
+  </div>
+
+
+  <script>
+    // Simulação de dados (substituir com dados do Django depois)
+    const dados = {
+      produtos: 120,
+      clientes: 45,
+      vendas: 3200,
+      compras: 1800,
+      ultimasVendas: [
+        {cliente: "João", produto: "Arroz", valor: 25, data: "15/04"},
+        {cliente: "Maria", produto: "Feijão", valor: 18, data: "15/04"},
+        {cliente: "Carlos", produto: "Óleo", valor: 10, data: "14/04"}
+      ]
+    };
+
+
+    document.getElementById("produtos").innerText = dados.produtos;
+    document.getElementById("clientes").innerText = dados.clientes;
+    document.getElementById("vendas").innerText = "R$ " + dados.vendas;
+    document.getElementById("compras").innerText = "R$ " + dados.compras;
+
+
+    const tabela = document.getElementById("tabelaVendas");
+
+
+    dados.ultimasVendas.forEach(venda => {
+      const row = `
+        <tr>
+          <td>${venda.cliente}</td>
+          <td>${venda.produto}</td>
+          <td>R$ ${venda.valor}</td>
+          <td>${venda.data}</td>
+        </tr>
+      `;
+      tabela.innerHTML += row;
+    });
+
+
+    // Data atual
+    const data = new Date();
+    document.getElementById("dataAtual").innerText =
+      data.toLocaleDateString("pt-BR");
+  </script>
+
+
+</body>
+</html>
+
